@@ -35,11 +35,12 @@ def main():
     for y in range(args.start_y, args.start_y + args.height * (args.slices_y), args.height):
         for x in range(args.start_x, args.start_x + args.width * (args.slices_x), args.width):
             slice = image.crop((x, y, x + args.width, y + args.height))
-            filename = os.path.splitext(args.input_image_path)[0] + " slice " + str(count)
+            base_filename = os.path.splitext(args.input_image_path)[0] + " slice " + str(count)
 
+            filename = base_filename
             existing_count = 0
             while os.path.isfile(filename + extension):
-                filename += "-" + str(existing_count)
+                filename = base_filename + "-" + str(existing_count)
                 existing_count += 1
 
             try:
